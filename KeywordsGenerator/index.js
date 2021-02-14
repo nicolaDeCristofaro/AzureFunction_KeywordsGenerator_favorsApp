@@ -13,7 +13,8 @@ module.exports = async function (context, eventGridEvent) {
     //2. Generate keywords from these two texts
     const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
 
-    const client = new TextAnalyticsClient("https://keywords-extraction-service.cognitiveservices.azure.com/", new AzureKeyCredential("24cf1c62ccab46f1881fefd6c64d9d66"));
+    const client = new TextAnalyticsClient("https://keywords-extraction-service.cognitiveservices.azure.com/",
+                                           new AzureKeyCredential("24cf1c62ccab46f1881fefd6c64d9d66"));
 
     const documents = [titleFavorInserted, descFavorInserted ];
 
