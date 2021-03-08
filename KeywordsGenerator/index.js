@@ -13,8 +13,8 @@ module.exports = async function (context, eventGridEvent) {
     //2. Generate keywords from these two texts
     const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
 
-    const client = new TextAnalyticsClient("https://keywords-extraction-service.cognitiveservices.azure.com/",
-                                           new AzureKeyCredential("24cf1c62ccab46f1881fefd6c64d9d66"));
+    const client = new TextAnalyticsClient("<insert-your-keyword-extractor-endpoint>",
+                                           new AzureKeyCredential(""));
 
     const documents = [titleFavorInserted, descFavorInserted ];
 
@@ -41,7 +41,7 @@ module.exports = async function (context, eventGridEvent) {
 
 
     //3. Prepare the database update
-    var url = 'https://favors-app.azurewebsites.net/tables/Keywords';
+    var url = '<insert-your-mobileApp-endpoint>/tables/Keywords';
     const headers = {
         'ZUMO-API-VERSION': '2.0.0'
     };
@@ -92,8 +92,6 @@ module.exports = async function (context, eventGridEvent) {
     console.log(keywords_toInsert); //new keywords to insert in the table
 
     //4. Insert new Keywords in database
-    url = 'https://favors-app.azurewebsites.net/tables/Keywords';
-
     const addKeywords = (k) => {
         return fetch(url, {
             method: 'POST',
@@ -119,7 +117,7 @@ module.exports = async function (context, eventGridEvent) {
     }
 
     //5. Insert relationships FavorPost-Keyword in database
-    url = 'https://favors-app.azurewebsites.net/tables/Favors_Keywords';
+    url = '<insert-your-mobileApp-endpoint>/tables/Favors_Keywords';
 
     const addFavors_Keywords_relation = (k) => {
         console.log(k);
